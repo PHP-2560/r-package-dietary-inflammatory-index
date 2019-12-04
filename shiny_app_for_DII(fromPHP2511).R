@@ -19,7 +19,7 @@ shinyApp(
       ),
     mainPanel(
       h3(textOutput("caption")),
-      plotOutput("plot")
+      plotOutput("plot"), tableOutput("table")
     )
   )),
 # Define server logic required to plot variables
@@ -37,9 +37,15 @@ shinyServer(function(input, output) {
     })
     # Generate a plot of the requested variables
     output$plot <- renderPlot({
-      p <- ggplot(data, aes_string(x=input$variable, y=input$variable2)) + geom_point()
+      p <- ggplot(data, aes_string(x=input$variable, y=input$variable2, color = "tx")) + 
+        geom_point() + 
+        geom_smooth(method = "lm")
       print(p)
     })
+    # output$table <- renderTable({
+    #   mean(data$dii)
+    # })
   }),
   options = list(height = 200)
 )
+
