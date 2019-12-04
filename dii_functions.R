@@ -7,6 +7,7 @@ library(plyr)
 library(stringr)
 library(tidyverse)
 library(tableone)
+library(readr)
 
 # NOTE: THIS PACKAGE REQUIRES A MATRIX OF AVERAGE INTAKE OF THE FOLLOWING ITEMS: 
 # Not all items are present in most FFQs or ASA24s
