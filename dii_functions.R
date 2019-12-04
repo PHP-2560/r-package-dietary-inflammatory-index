@@ -8,11 +8,11 @@ library(stringr)
 library(tidyverse)
 library(tableone)
 library(readr)
-
+data <- readRDS("diet_data_sample.rds")
 # NOTE: THIS PACKAGE REQUIRES A MATRIX OF AVERAGE INTAKE OF THE FOLLOWING ITEMS: 
 # Not all items are present in most FFQs or ASA24s
-glob.data <- readRDS("global_dii_data.rds")
-glob.data$item
+glob_data <- readRDS("global_dii_data.rds")
+glob_data$item
 
 #Function to convert grams to micrograms and micrograms to grams
 
@@ -28,9 +28,9 @@ micrograms_to_grams <- function(item_intake_in_micrograms)
   return(grams)
 }
 
-data$avg.caffeine <- grams_to_micrograms(data$avg.caffeine)
-micrograms_to_grams(data$avg.caffeine)
-data$avg.b6 <- grams_to_micrograms(data$avg.b6)
+data$caffeine <- grams_to_micrograms(data$caffeine)
+micrograms_to_grams(data$caffeine)
+data$b6 <- grams_to_micrograms(data$b6)
 
 #Function which grabs intake index and matches to index for global values
 
@@ -38,7 +38,26 @@ data$avg.b6 <- grams_to_micrograms(data$avg.b6)
 index_g <- c()
 index_d <- c()
 ### THIS WILL BE THE HARDEST PART
-index_LIFE_intake <- c(12,13,14,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52) 
+
+sort_vars <- function(data){
+ data <- data %>% 
+    select("alcohol",        "b12",            "b6",
+           "beta.carotene",  "caffeine",
+           "chole",          "kcal",
+           "fiber",          "folic.acid",     
+           "iron",           "magnesium",     
+           "MUFA",           "niacin",       
+           "PUFA",           "riboflavin",    
+           "sat.fat",        "selenium",       "thiamin",
+           "vit.A",          "vit.C",         
+           "vit.D",          "vit.E",          
+           "zinc") 
+}
+
+sort_vars(data)
+names(data)
+glob.data$item
+index_intake <- c(12,13,14,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52) 
 index_global <- c(6,22,10,1,8,2,3,4,5,7,11,12,15,16,17,18,23,24,28,31,32,33,34,35,26,27)
 ### HARDEST PART
 
