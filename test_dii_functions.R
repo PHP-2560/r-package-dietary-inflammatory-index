@@ -56,4 +56,6 @@ cat(min(dii), max(dii)) # It appears to be.
 
 hist(dii)
 
-# Diet appears to be anti-inflammatory in this sample.
+# Diet appears to be anti-inflammatory in this sample. Add as var to test data
+
+test_data$dii <- dii
